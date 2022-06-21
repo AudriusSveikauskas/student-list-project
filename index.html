@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+    <title>Kontaktų forma</title>
+</head>
+<body>
+
+<div class="modal">
+    <div class="modal-message">
+        <p class="modal-text"></p>
+        <ion-icon name="close-outline" class="modal-close-button"></ion-icon>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="form-wrapper">
+        <h3 class="form-title">Naujas studentas</h3>
+        <form action="#" id="student-form" data-form-id="0">
+
+            <div class="form-section">
+                <label for="student-name" class="form-label">Vardas:</label>
+                <input class="form-text-input" type="text" id="student-name" placeholder="Įrašykite studento vardą...">
+                <span class="form-span"></span>
+            </div>
+
+            <div class="form-section">
+                <label for="student-surname" class="form-label">Pavardė:</label>
+                <input class="form-text-input" type="text" id="student-surname"
+                       placeholder="Įrašykite studento pavardę...">
+                <span class="form-span"></span>
+            </div>
+
+            <div class="form-section">
+                <label for="student-age" class="form-label">Amžius:</label>
+                <input class="form-text-input" type="text" id="student-age" placeholder="Įrašykite studento amžių...">
+                <span class="form-span"></span>
+            </div>
+
+            <div class="form-section">
+                <label for="student-phone" class="form-label">Telefonas:</label>
+                <input class="form-text-input" type="text" id="student-phone" placeholder="Įrašykite studento amžių...">
+                <span class="form-span" id="student-phone-alert">&nbsp;</span>
+            </div>
+
+            <div class="form-section">
+                <label for="student-email" class="form-label">El.paštas:</label>
+                <input class="form-text-input" type="text" id="student-email" placeholder="Įrašykite studento amžių...">
+                <span class="form-span"></span>
+            </div>
+
+            <div class="form-section">
+                <label for="student-knowledge" class="form-label">Žinių lygis:</label>
+                <input type="range" id="student-knowledge" min="1" max="10" value="5">
+            </div>
+
+            <fieldset>
+                <legend>Grupė:</legend>
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 1" id="type1">
+                    <label for="type1" class="form-label">Type 1</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 2" id="type2">
+                    <label for="type2" class="form-label">Type 2</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 3" id="type3">
+                    <label for="type3" class="form-label">Type 3</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 4" id="type4">
+                    <label for="type4" class="form-label">Type 4</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 5" id="type5">
+                    <label for="type5" class="form-label">Type 5</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 6" id="type6">
+                    <label for="type6" class="form-label">Type 6</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 7" id="type7">
+                    <label for="type7" class="form-label">Type 7</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 8" id="type8">
+                    <label for="type8" class="form-label">Type 8</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 9" id="type9">
+                    <label for="type9" class="form-label">Type 9</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="knowledge" value="Type 10" id="type10">
+                    <label for="type10" class="form-label">Type 10</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Programavimo kalbos:</legend>
+
+                <div class="inline-block">
+                    <input type="checkbox" value="JavaScript" id="lang1" name="language">
+                    <label for="lang1" class="form-label">JavaScript</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="checkbox" value="Java" id="lang2" name="language">
+                    <label for="lang2" class="form-label">Java</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="checkbox" value="Python" id="lang3" name="language">
+                    <label for="lang3" class="form-label">Python</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="checkbox" value="PHP" id="lang4" name="language">
+                    <label for="lang4" class="form-label">PHP</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="checkbox" value="C++" id="lang5" name="language">
+                    <label for="lang5" class="form-label">C++</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="checkbox" value="Kotlin" id="lang6" name="language">
+                    <label for="lang6" class="form-label">Kotlin</label>
+                </div>
+            </fieldset>
+
+            <button type="submit" id="submit-button">Įrašyti</button>
+
+        </form>
+    </div>
+    <div class="table-wrapper">
+        <div class="form-header">
+            <h3 class="form-title">Studentų sąrašas</h3>
+            <div class="form-search-section">
+                <span>Ieškoti pagal:</span>
+                <select id="search-select">
+                    <option value="name">Vardą</option>
+                    <option value="surname">Pavardę</option>
+                    <option value="group">Grupę</option>
+                    <option value="email">E.paštą</option>
+                </select>
+                <input type="text" id="search-input">
+                <button id="search-button">Ieškoti...</button>
+            </div>
+
+        </div>
+
+        <table id="students-list">
+            <tr>
+                <th>ID</th>
+                <th>Studentas (amžius)</th>
+                <th>Grupė</th>
+                <th>Žinios</th>
+                <th>Kontaktai</th>
+                <th>Veiksmai</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
