@@ -171,11 +171,6 @@ th, td {
     font-family: 'Montserrat', sans-serif;
 }
 
-#search-button {
-    padding: .8rem 2rem;
-    font-family: 'Montserrat', sans-serif;
-}
-
 #search-select {
     padding: .8rem;
     font-family: 'Montserrat', sans-serif;
@@ -183,7 +178,7 @@ th, td {
 
 #search-input {
     padding: .8rem;
-    width: 16rem;
+    width: 18rem;
     font-family: 'Montserrat', sans-serif;
 }
 
