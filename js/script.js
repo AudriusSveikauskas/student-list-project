@@ -3,7 +3,7 @@
 const STUDENT_FORM = document.getElementById("student-form");
 const TABLE = document.getElementById("students-list");
 const MODAL = document.querySelector(".modal");
-const SEARCH_BUTTON = document.getElementById("search-button");
+const SEARCH_INPUT = document.getElementById("search-input");
 let studentsDatabase = [];
 let id = 1;
 
@@ -24,11 +24,11 @@ STUDENT_FORM.addEventListener("submit", (form) => {
   form.preventDefault();
 });
 
-SEARCH_BUTTON.addEventListener("click", (e) => {
-  const name = document.getElementById("search-select").value;
+SEARCH_INPUT.addEventListener("input", (e) => {
+  const filter = document.getElementById("search-select").value;
   const value = document.getElementById("search-input").value;
 
-  console.log(name + " / " + value);
+  fillTable(filterDatabase(studentsDatabase, filter, value));
 });
 
 function checkForm(form) {
@@ -38,8 +38,8 @@ function checkForm(form) {
 function writeStudent(id, form) {
   const studentObj = {
     id: `${id}`,
-    name: `${form.elements["student-name"].value}`,
-    surname: `${form.elements["student-surname"].value}`,
+    name: `${normalizeString(form.elements["student-name"].value, true)}`,
+    surname: `${normalizeString(form.elements["student-surname"].value, true)}`,
     age: `${form.elements["student-age"].value}`,
     phone: `${form.elements["student-phone"].value}`,
     email: `${form.elements["student-email"].value}`,
@@ -65,7 +65,7 @@ function writeStudent(id, form) {
     studentsDatabase.push(studentObj);
   }
 
-  fillTable(prepareDatabase(studentsDatabase, "reverse"));
+  fillTable(reverseDatabase(studentsDatabase));
 }
 
 function fillTable(arr) {
@@ -87,9 +87,7 @@ function fillTable(arr) {
     actions.classList.add("td-actions");
 
     id.textContent = `${student.id}`;
-    name.textContent = `${normalizeString(student.name)} ${normalizeString(
-      student.surname
-    )} (${student.age})`;
+    name.textContent = `${student.name} ${student.surname} (${student.age})`;
     group.textContent = `${student.group}`;
     knowledge.innerText = `${student.knowledge} ${pointsText(
       student.knowledge
@@ -159,7 +157,7 @@ function fillTable(arr) {
       const deletedStudent = `Studentas, <strong>${student.name} ${student.surname}</strong>, sėkmingai ištrintas.`;
       showModal("warning", deletedStudent);
       studentsDatabase.splice(studentsDatabase.indexOf(student), 1);
-      fillTable(prepareDatabase(studentsDatabase, "reverse"));
+      fillTable(reverseDatabase(studentsDatabase));
       STUDENT_FORM.reset();
       STUDENT_FORM.dataset.formId = "0";
     });
@@ -172,11 +170,15 @@ function clearTable() {
   }
 }
 
-function normalizeString(string) {
-  return (
-    string.trimStart().charAt(0).toUpperCase() +
-    string.replaceAll(" ", "").slice(1).toLowerCase()
-  );
+function normalizeString(string, capitalizeFirstLetter) {
+  if (capitalizeFirstLetter) {
+    return (
+      string.trimStart().charAt(0).toUpperCase() +
+      string.replaceAll(" ", "").slice(1).toLowerCase()
+    );
+  } else {
+    return string.replaceAll(" ", "").toLowerCase();
+  }
 }
 
 function pointsText(points) {
@@ -208,13 +210,26 @@ function studentLanguages(languages) {
   return studentLanguages;
 }
 
-function prepareDatabase(arr, method, name, string) {
+function reverseDatabase(arr) {
+  let newArray = [...arr];
+  return newArray.reverse();
+}
+
+function filterDatabase(arr, filter, value) {
   let newArray = [];
 
-  if (method === "reverse") {
-    newArray = [...arr];
-    return newArray.reverse();
-  }
+  arr.map((student) => {
+    if (
+      normalizeString(student[`${filter}`], false).includes(
+        normalizeString(value, false)
+      )
+    ) {
+      console.log(student);
+      newArray.push(student);
+    }
+  });
+  console.log(newArray);
+  return newArray;
 }
 
 // SHOW modal
