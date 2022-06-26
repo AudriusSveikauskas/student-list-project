@@ -60,61 +60,72 @@
                 <input type="range" id="student-knowledge" min="1" max="10" value="5">
             </div>
 
-            <fieldset>
-                <legend>Grupė:</legend>
+            <label for="student-group" class="form-label">Grupė:</label>
+            <fieldset id="student-group">
+
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 1" id="type1">
+                    <input type="radio" name="group" value="Type 1" id="type1">
                     <label for="type1" class="form-label">Type 1</label>
                 </div>
 
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 2" id="type2">
+                    <input type="radio" name="group" value="Type 2" id="type2">
                     <label for="type2" class="form-label">Type 2</label>
                 </div>
 
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 3" id="type3">
+                    <input type="radio" name="group" value="Type 3" id="type3">
                     <label for="type3" class="form-label">Type 3</label>
                 </div>
 
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 4" id="type4">
+                    <input type="radio" name="group" value="Type 4" id="type4">
                     <label for="type4" class="form-label">Type 4</label>
                 </div>
 
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 5" id="type5">
+                    <input type="radio" name="group" value="Type 5" id="type5">
                     <label for="type5" class="form-label">Type 5</label>
                 </div>
 
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 6" id="type6">
+                    <input type="radio" name="group" value="Type 6" id="type6">
                     <label for="type6" class="form-label">Type 6</label>
                 </div>
 
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 7" id="type7">
+                    <input type="radio" name="group" value="Type 7" id="type7">
                     <label for="type7" class="form-label">Type 7</label>
                 </div>
 
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 8" id="type8">
+                    <input type="radio" name="group" value="Type 8" id="type8">
                     <label for="type8" class="form-label">Type 8</label>
                 </div>
 
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 9" id="type9">
+                    <input type="radio" name="group" value="Type 9" id="type9">
                     <label for="type9" class="form-label">Type 9</label>
                 </div>
 
                 <div class="inline-block">
-                    <input type="radio" name="knowledge" value="Type 10" id="type10">
+                    <input type="radio" name="group" value="Type 10" id="type10">
                     <label for="type10" class="form-label">Type 10</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="group" value="Type 11" id="type11">
+                    <label for="type11" class="form-label">Type 11</label>
+                </div>
+
+                <div class="inline-block">
+                    <input type="radio" name="group" value="Type 12" id="type12">
+                    <label for="type12" class="form-label">Type 12</label>
                 </div>
             </fieldset>
 
-            <fieldset>
-                <legend>Programavimo kalbos:</legend>
+            <label for="student-language" class="form-label">Programavimo kalbos:</label>
+            <fieldset id="student-language">
 
                 <div class="inline-block">
                     <input type="checkbox" value="JavaScript" id="lang1" name="language">
@@ -152,6 +163,10 @@
         </form>
     </div>
     <div class="table-wrapper">
+        <div class="prepared-data">
+            <h3 class="form-title">Studentų sąrašas tuščias...</h3>
+            <button id="prepared-data-button">Užpildyti lentelę pradiniais duomenimis</button>
+        </div>
         <div class="form-header">
             <h3 class="form-title">Studentų sąrašas</h3>
             <div class="form-search-section">
@@ -181,6 +196,5 @@
 </div>
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
