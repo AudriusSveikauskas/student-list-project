@@ -108,7 +108,7 @@ th, td {
 .form-section {
     display: flex;
     flex-direction: column;
-    margin-top: 1rem;
+    margin-top: .6rem;
 }
 
 .form-text-input {
@@ -141,10 +141,10 @@ th, td {
 
 .form-span {
     color: #e03131;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     margin-top: .2rem;
-    height: 1.2rem;
+    height: 1rem;
 }
 
 .form-header {
@@ -163,15 +163,11 @@ th, td {
     display: inline-block;
 }
 
-#student-knowledge {
-    margin-bottom: 1rem;
-}
-
 #submit-button {
     width: 100%;
-    margin-top: 1rem;
     padding: 1rem;
     font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
 }
 
 #search-select, #search-select * {
@@ -251,6 +247,31 @@ th, td {
     cursor: pointer;
 }
 
+.marks-box {
+    align-self: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -1rem;
+    padding: 0 .8rem;
+}
+
+.marks-box-label {
+    align-self: center;
+    display: flex;
+    justify-content: space-between;
+    padding-left: .5rem;
+    padding-right: .4rem;
+    margin-bottom: 1rem;
+}
+
+.marks {
+    margin-top: .8rem;
+    font-size: .6rem;
+}
+
+.marks-label {
+    font-size: 1rem;
+}
 
 @media screen and (max-width: 992px) {
     .container {

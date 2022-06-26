@@ -86,6 +86,7 @@ PREPARED_DATA_BUTTON.addEventListener("click", () => {
   id = 6;
   fillTable(reverseDatabase(studentsDatabase));
   removeInputClass();
+  removeErrorMessages();
   hidePreparedData();
 });
 
@@ -168,25 +169,35 @@ function checkForm(form) {
 
 function checkName(name) {
   const studentName = normalizeString(name.value, false);
+  const studentNameError = document.getElementById("student-name-error");
+
   if (studentName.length >= NAME_MIN_LENGTH && charIsLetter(studentName)) {
     changeInputClass(name, true);
+    studentNameError.textContent = "";
     return true;
   } else {
     changeInputClass(name, false);
+    studentNameError.textContent =
+      "Vardas per trumpas arba panaudoti neleistini simboliai.";
     return false;
   }
 }
 
 function checkSurname(surname) {
   const studentSurname = normalizeString(surname.value, false);
+  const studentSurnameError = document.getElementById("student-surname-error");
+
   if (
     studentSurname.length >= SURNAME_MIN_LENGTH &&
     charIsLetter(studentSurname)
   ) {
     changeInputClass(surname, true);
+    studentSurnameError.textContent = "";
     return true;
   } else {
     changeInputClass(surname, false);
+    studentSurnameError.textContent =
+      "Pavardė per trumpa arba panaudoti neleistini simboliai.";
     return false;
   }
 }
@@ -204,11 +215,15 @@ function charIsLetter(str) {
 
 function checkAge(age) {
   const studentAge = normalizeString(age.value, false);
+  const studentAgeError = document.getElementById("student-age-error");
+
   if (Number(studentAge) >= AGE_MIN && Number(studentAge) < AGE_MAX) {
     changeInputClass(age, true);
+    studentAgeError.textContent = "";
     return true;
   } else {
     changeInputClass(age, false);
+    studentAgeError.textContent = "Amžius turi būti tarp 18 ir 120 metų.";
     return false;
   }
 }
@@ -218,6 +233,7 @@ function checkPhone(phone) {
   const phoneFormat2 = /^\+370\d\d\d\d\d\d\d\d$/i;
   const phoneFormat3 = /^370\d\d\d\d\d\d\d\d$/i;
   const studentPhone = normalizeString(phone.value, false);
+  const studentPhoneError = document.getElementById("student-phone-error");
 
   if (
     phoneFormat1.test(studentPhone) ||
@@ -225,9 +241,12 @@ function checkPhone(phone) {
     phoneFormat3.test(studentPhone)
   ) {
     changeInputClass(phone, true);
+    studentPhoneError.textContent = "";
     return true;
   } else {
     changeInputClass(phone, false);
+    studentPhoneError.textContent =
+      "Leistini telefono numerio formatai: +370..., 370... arba 8...";
     return false;
   }
 }
@@ -235,12 +254,15 @@ function checkPhone(phone) {
 function checkEmail(email) {
   const mailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   const studentEmail = normalizeString(email.value, false);
+  const studentEmailError = document.getElementById("student-email-error");
 
   if (mailFormat.test(studentEmail)) {
     changeInputClass(email, true);
+    studentEmailError.textContent = "";
     return true;
   } else {
     changeInputClass(email, false);
+    studentEmailError.textContent = "Neteisingas el.pašto adresas.";
     return false;
   }
 }
@@ -276,6 +298,14 @@ function removeInputClass() {
   document.querySelectorAll(".form-text-input--red").forEach((element) => {
     element.classList.remove("form-text-input--red");
   });
+}
+
+function removeErrorMessages() {
+  document.getElementById("student-name-error").textContent = "";
+  document.getElementById("student-surname-error").textContent = "";
+  document.getElementById("student-age-error").textContent = "";
+  document.getElementById("student-phone-error").textContent = "";
+  document.getElementById("student-email-error").textContent = "";
 }
 
 function writeStudent(id, form) {
