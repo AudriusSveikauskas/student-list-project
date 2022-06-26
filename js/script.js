@@ -6,6 +6,7 @@ const STUDENT_SURNAME = document.getElementById("student-surname");
 const STUDENT_AGE = document.getElementById("student-age");
 const STUDENT_PHONE = document.getElementById("student-phone");
 const STUDENT_EMAIL = document.getElementById("student-email");
+const STUDENT_GROUP = document.querySelectorAll("[name='group']");
 const TABLE = document.getElementById("students-list");
 const MODAL = document.querySelector(".modal");
 const SEARCH_INPUT = document.getElementById("search-input");
@@ -74,12 +75,17 @@ const AGE_MAX = 120;
 let studentsDatabase = [];
 let id = 1;
 
+window.addEventListener("load", () => {
+  getLocalStorageItem();
+});
+
 PREPARED_DATA_BUTTON.addEventListener("click", () => {
   PREPARED_DATA.forEach((student) => {
     studentsDatabase.push(student);
   });
   id = 6;
   fillTable(reverseDatabase(studentsDatabase));
+  removeInputClass();
   hidePreparedData();
 });
 
@@ -104,22 +110,33 @@ STUDENT_FORM.addEventListener("submit", (form) => {
 
 STUDENT_NAME.addEventListener("input", () => {
   checkName(STUDENT_NAME);
+  setLocalStorageItem();
 });
 
 STUDENT_SURNAME.addEventListener("input", () => {
   checkSurname(STUDENT_SURNAME);
+  setLocalStorageItem();
 });
 
 STUDENT_AGE.addEventListener("input", () => {
   checkAge(STUDENT_AGE);
+  setLocalStorageItem();
 });
 
 STUDENT_PHONE.addEventListener("input", () => {
   checkPhone(STUDENT_PHONE);
+  setLocalStorageItem();
 });
 
 STUDENT_EMAIL.addEventListener("input", () => {
   checkEmail(STUDENT_EMAIL);
+  setLocalStorageItem();
+});
+
+STUDENT_GROUP.forEach((e) => {
+  e.addEventListener("change", () => {
+    checkGroup(e);
+  });
 });
 
 SEARCH_INPUT.addEventListener("input", () => {
@@ -231,7 +248,6 @@ function checkEmail(email) {
 function checkGroup(group) {
   const studentGroup = group.value;
   const studentGroupEl = document.getElementById("student-group");
-  console.log(studentGroupEl);
 
   if (studentGroup !== "") {
     changeInputClass(studentGroupEl, true);
@@ -250,6 +266,16 @@ function changeInputClass(input, isValid) {
     input.classList.remove("form-text-input--green");
     input.classList.add("form-text-input--red");
   }
+}
+
+function removeInputClass() {
+  document.querySelectorAll(".form-text-input--green").forEach((element) => {
+    element.classList.remove("form-text-input--green");
+  });
+
+  document.querySelectorAll(".form-text-input--red").forEach((element) => {
+    element.classList.remove("form-text-input--red");
+  });
 }
 
 function writeStudent(id, form) {
@@ -283,6 +309,8 @@ function writeStudent(id, form) {
   }
 
   STUDENT_FORM.dataset.formId = "0";
+  removeInputClass();
+  removeLocalStorageItem();
   fillTable(reverseDatabase(studentsDatabase));
 }
 
@@ -348,6 +376,7 @@ function fillTable(arr) {
     editStudent.addEventListener("click", () => {
       STUDENT_FORM.reset();
       STUDENT_FORM.dataset.formId = student.id;
+      removeInputClass();
 
       document.getElementById("student-name").value = student.name;
       document.getElementById("student-surname").value = student.surname;
@@ -455,6 +484,34 @@ function hidePreparedData() {
   document
     .querySelector(".table-wrapper")
     .style.setProperty("position", "static");
+}
+
+function setLocalStorageItem() {
+  if (typeof Storage !== "undefined") {
+    localStorage.setItem("studentName", STUDENT_NAME.value);
+    localStorage.setItem("studentSurname", STUDENT_SURNAME.value);
+    localStorage.setItem("studentAge", STUDENT_AGE.value);
+    localStorage.setItem("studentPhone", STUDENT_PHONE.value);
+    localStorage.setItem("studentEmail", STUDENT_EMAIL.value);
+  }
+}
+
+function getLocalStorageItem() {
+  if (typeof Storage !== "undefined") {
+    STUDENT_NAME.value = localStorage.getItem("studentName");
+    STUDENT_SURNAME.value = localStorage.getItem("studentSurname");
+    STUDENT_AGE.value = localStorage.getItem("studentAge");
+    STUDENT_PHONE.value = localStorage.getItem("studentPhone");
+    STUDENT_EMAIL.value = localStorage.getItem("studentEmail");
+  }
+}
+
+function removeLocalStorageItem() {
+  localStorage.removeItem("studentName");
+  localStorage.removeItem("studentSurname");
+  localStorage.removeItem("studentAge");
+  localStorage.removeItem("studentPhone");
+  localStorage.removeItem("studentEmail");
 }
 
 // SHOW modal
