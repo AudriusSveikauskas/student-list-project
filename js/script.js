@@ -372,6 +372,7 @@ function fillTable(arr) {
       STUDENT_FORM.reset();
       STUDENT_FORM.dataset.formId = "0";
     });
+      localStorage.setItem("studentsDatabase", JSON.stringify(studentsDatabase));
   });
 }
 
