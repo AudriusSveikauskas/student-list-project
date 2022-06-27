@@ -10,64 +10,6 @@ const STUDENT_GROUP = document.querySelectorAll("[name='group']");
 const TABLE = document.getElementById("students-list");
 const MODAL = document.querySelector(".modal");
 const SEARCH_INPUT = document.getElementById("search-input");
-const PREPARED_DATA_BUTTON = document.getElementById("prepared-data-button");
-const PREPARED_DATA = [
-  {
-    id: 1,
-    name: "Petras",
-    surname: "Petrauskas",
-    age: 44,
-    phone: "+37060011222",
-    email: "petras@gmail.com",
-    knowledge: 4,
-    group: "Type 5",
-    languages: ["Java", "Kotlin"],
-  },
-  {
-    id: 2,
-    name: "Antanas",
-    surname: "Antanaitis",
-    age: 33,
-    phone: "+37060022333",
-    email: "antanas@yahoo.com",
-    knowledge: 6,
-    group: "Type 11",
-    languages: ["PHP"],
-  },
-  {
-    id: 3,
-    name: "Jonas",
-    surname: "Jonaitis",
-    age: 45,
-    phone: "861144555",
-    email: "jonas@mail.com",
-    knowledge: 9,
-    group: "Type 3",
-    languages: ["JavaScript", "C++"],
-  },
-  {
-    id: 4,
-    name: "Ona",
-    surname: "Onaitienė",
-    age: 27,
-    phone: "+37069977888",
-    email: "ona.onaitiene@gmail.com",
-    knowledge: 8,
-    group: "Type 7",
-    languages: ["Java", "Python"],
-  },
-  {
-    id: 5,
-    name: "Inga",
-    surname: "Ingaitė",
-    age: 18,
-    phone: "862233444",
-    email: "inga@pastas.lt",
-    knowledge: 9,
-    group: "Type 5",
-    languages: ["Kotlin", "Python", "C++"],
-  },
-];
 const NAME_MIN_LENGTH = 3;
 const SURNAME_MIN_LENGTH = 6;
 const AGE_MIN = 18;
@@ -77,17 +19,16 @@ let id = 1;
 
 window.addEventListener("load", () => {
   getLocalStorageItem();
-});
-
-PREPARED_DATA_BUTTON.addEventListener("click", () => {
-  PREPARED_DATA.forEach((student) => {
-    studentsDatabase.push(student);
+  const studentDatabaseLocal = localStorage.getItem("studentsDatabase");
+  studentsDatabase = [...JSON.parse(studentDatabaseLocal)];
+  studentsDatabase.forEach((e) => {
+    if (Number(e.id) > id) {
+      id = Number(e.id);
+      console.log(id);
+    }
+    id++;
   });
-  id = 6;
   fillTable(reverseDatabase(studentsDatabase));
-  removeInputClass();
-  removeErrorMessages();
-  hidePreparedData();
 });
 
 STUDENT_FORM.addEventListener("submit", (form) => {
@@ -95,7 +36,6 @@ STUDENT_FORM.addEventListener("submit", (form) => {
     if (STUDENT_FORM.dataset.formId === "0") {
       writeStudent(id, form.target);
       id++;
-      hidePreparedData();
     } else {
       writeStudent(Number(STUDENT_FORM.dataset.formId), form.target);
     }
@@ -300,14 +240,6 @@ function removeInputClass() {
   });
 }
 
-function removeErrorMessages() {
-  document.getElementById("student-name-error").textContent = "";
-  document.getElementById("student-surname-error").textContent = "";
-  document.getElementById("student-age-error").textContent = "";
-  document.getElementById("student-phone-error").textContent = "";
-  document.getElementById("student-email-error").textContent = "";
-}
-
 function writeStudent(id, form) {
   const studentObj = {
     id: `${id}`,
@@ -341,6 +273,7 @@ function writeStudent(id, form) {
   STUDENT_FORM.dataset.formId = "0";
   removeInputClass();
   removeLocalStorageItem();
+  localStorage.setItem("studentsDatabase", JSON.stringify(studentsDatabase));
   fillTable(reverseDatabase(studentsDatabase));
 }
 
@@ -507,13 +440,6 @@ function filterDatabase(arr, filter, value) {
   });
 
   return newArray;
-}
-
-function hidePreparedData() {
-  document.querySelector(".prepared-data").style.display = "none";
-  document
-    .querySelector(".table-wrapper")
-    .style.setProperty("position", "static");
 }
 
 function setLocalStorageItem() {
